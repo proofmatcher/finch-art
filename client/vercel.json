@@ -1,0 +1,18 @@
+{
+    "version": 2,
+    "name": "finch-art",
+    "rewrites": [
+          {
+                  "source": "/api/:path*",
+                  "destination": "https://finch-art-production.up.railway.app/api/:path*"
+          },
+          {
+                  "source": "/uploads/:path*",
+                  "destination": "https://finch-art-production.up.railway.app/uploads/:path*"
+          },
+          {
+                  "source": "/(.*)",
+                  "destination": "/index.html"
+          }
+    ]
+}
