@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, Heart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-
-const API_BASE = '';
+import { getImageUrl } from '../lib/imageUrl';
 
 function formatPrice(price) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(price);
@@ -27,7 +26,7 @@ export default function ArtworkCard({ artwork }) {
         <div className="artwork-card__image-wrapper">
           <img
             className="artwork-card__image"
-            src={artwork.image_url ? `${API_BASE}${artwork.image_url}` : '/placeholder.jpg'}
+            src={getImageUrl(artwork.image_url)}
             alt={artwork.title}
             loading="lazy"
           />

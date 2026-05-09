@@ -306,4 +306,10 @@ async function seed() {
   console.log('✅ Database seeding complete!');
 }
 
-seed().catch(console.error);
+// Run directly: node db/seed.js
+// Or exported for auto-seed on first boot
+if (require.main === module) {
+  seed().catch(console.error);
+}
+
+module.exports = seed;

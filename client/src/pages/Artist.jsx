@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Award, BookOpen, Palette, Camera, X } from 'lucide-react';
+import { getImageUrl } from '../lib/imageUrl';
 import './Artist.css';
 
 const exhibitions = [
@@ -20,25 +21,24 @@ const timeline = [
   { year: '1986', role: 'Production Assistant', org: 'CNN — Showbiz Today', desc: 'Worked with Sandy Kenyon and Robert Wiener to produce daily entertainment news.' },
 ];
 
-// Porter's real photos with captions
 const porterPhotos = [
   {
-    src: '/uploads/porter_seine_paris.jpg',
+    src: getImageUrl('/uploads/porter_seine_paris.jpg'),
     caption: 'By the Seine River, Paris',
     subcaption: 'A city that shaped his artistic vision',
   },
   {
-    src: '/uploads/porter_paris_arc.jpg',
+    src: getImageUrl('/uploads/porter_paris_arc.jpg'),
     caption: 'Atop the Arc de Triomphe',
     subcaption: 'Eiffel Tower and Paris skyline, 2023',
   },
   {
-    src: '/uploads/porter_museum_rothko.jpg',
+    src: getImageUrl('/uploads/porter_museum_rothko.jpg'),
     caption: 'With a Rothko at the museum',
     subcaption: 'Connecting with the masters of Abstract Expressionism',
   },
   {
-    src: '/uploads/porter_beach_bahamas.jpg',
+    src: getImageUrl('/uploads/porter_beach_bahamas.jpg'),
     caption: 'Island life, Bahamas',
     subcaption: 'Nature and travel feed the creative spirit',
   },
@@ -85,7 +85,7 @@ export default function Artist() {
       {/* Hero — real photo of Porter by the Seine */}
       <section className="artist-hero">
         <div className="artist-hero__bg">
-          <img src="/uploads/porter_paris_arc.jpg" alt="R. Porter Finch — Paris" />
+          <img src={getImageUrl('/uploads/porter_paris_arc.jpg')} alt="R. Porter Finch — Paris" />
           <div className="artist-hero__overlay" />
         </div>
         <div className="container">
@@ -116,7 +116,7 @@ export default function Artist() {
             {/* Real portrait by the Seine */}
             <div className="artist-portrait-wrapper" onClick={() => setLightbox(0)}>
               <img
-                src="/uploads/porter_seine_paris.jpg"
+                src={getImageUrl('/uploads/porter_seine_paris.jpg')}
                 alt="R. Porter Finch by the Seine River, Paris"
                 className="artist-portrait"
               />
@@ -195,7 +195,7 @@ export default function Artist() {
         {/* Rothko museum moment — wide feature */}
         <section className="artist-museum-feature">
           <div className="artist-museum-feature__image">
-            <img src="/uploads/porter_museum_rothko.jpg" alt="R. Porter Finch with a Rothko painting" />
+            <img src={getImageUrl('/uploads/porter_museum_rothko.jpg')} alt="R. Porter Finch with a Rothko painting" />
           </div>
           <div className="artist-museum-feature__content">
             <div className="section-header__eyebrow">Artistic Lineage</div>

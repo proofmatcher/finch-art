@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-const { initializeDatabase } = require('./db/schema');
+const { initializeDatabase, getDb } = require('./db/schema');
 const artworksRouter = require('./routes/artworks');
 const authRouter = require('./routes/auth');
 const ordersRouter = require('./routes/orders');
@@ -13,8 +13,21 @@ const contactRouter = require('./routes/contact');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Initialize DB
+// Initialize DB + auto-seed on first run
 initializeDatabase();
+(async () => {
+  try {
+    const db = getDb();
+    const count = db.prepare('SELECT COUNT(*) as n FROM artworks').get();
+    if (count.n === 0) {
+      console.log('📦 Empty database — running seed...');
+      await require('./db/seed')();
+    }
+  } catch (e) {
+    console.error('Auto-seed error:', e.message);
+  }
+})();
+
 
 // Middleware
 const allowedOrigins = [

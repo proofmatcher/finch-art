@@ -12,12 +12,15 @@ client/.vite/
 server/.env
 client/.env
 
-# Database
+# Database — NOT committed (Railway will init fresh DB on first run)
+server/*.db
+server/*.db-shm
+server/*.db-wal
 server/db/*.db
 server/db/*.sqlite
 
-# Uploads (user files — not committed to git)
-# server/uploads/ — keep the artwork images
+# Uploads — YES committed (artwork images & Porter photos must be in repo)
+# server/uploads/ is tracked
 
 # OS
 .DS_Store

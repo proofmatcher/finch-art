@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import ArtworkCard from '../components/ArtworkCard';
 import { ArrowRight, Award, Truck, RefreshCw, Shield } from 'lucide-react';
+import api from '../lib/api';
+import { getImageUrl } from '../lib/imageUrl';
 import './Home.css';
 
-const HERO_IMG = '/uploads/finch_art_hero.png';
+const HERO_IMG = getImageUrl('/uploads/finch_art_hero.png');
 
 const categories = [
   { label: 'Abstract Paintings', icon: '🎨', path: '/gallery?category=painting&style=Abstract+Expressionism' },
@@ -37,8 +38,8 @@ export default function Home() {
 
   useEffect(() => {
     Promise.all([
-      axios.get('/api/artworks?is_featured=1&limit=8'),
-      axios.get('/api/artworks?is_on_sale=1&limit=4'),
+      api.get('/api/artworks?is_featured=1&limit=8'),
+      api.get('/api/artworks?is_on_sale=1&limit=4'),
     ]).then(([featRes, saleRes]) => {
       setFeatured(featRes.data.artworks);
       setOnSale(saleRes.data.artworks);
@@ -126,7 +127,7 @@ export default function Home() {
         <div className="container">
           <div className="about-strip__inner">
             <div className="about-strip__image-wrapper">
-              <img src="/uploads/artwork_santa_fe_sky.png" alt="R. Porter Finch — Santa Fe Sky" className="about-strip__image" />
+              <img src={getImageUrl('/uploads/artwork_santa_fe_sky.png')} alt="R. Porter Finch — Santa Fe Sky" className="about-strip__image" />
             </div>
             <div className="about-strip__content">
               <div className="section-header__eyebrow">The Artist</div>
