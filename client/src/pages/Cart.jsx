@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { Trash2, ShoppingBag, ArrowRight, Shield, Truck, RefreshCw } from 'lucide-react';
+import { getImageUrl } from '../lib/imageUrl';
 import './Cart.css';
 
 function formatPrice(p) {
@@ -33,7 +34,7 @@ export default function Cart() {
               {items.map(item => (
                 <div key={item.id} className="cart-page__item">
                   <div className="cart-page__item-image">
-                    <img src={item.image_url || '/placeholder.jpg'} alt={item.title} />
+                    <img src={getImageUrl(item.image_url)} alt={item.title} />
                   </div>
                   <div className="cart-page__item-info">
                     <div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { X, ShoppingBag, Trash2, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { getImageUrl } from '../lib/imageUrl';
 import './CartDrawer.css';
 
 function formatPrice(price) {
@@ -42,7 +43,7 @@ export default function CartDrawer() {
               {items.map(item => (
                 <li key={item.id} className="cart-drawer__item">
                   <div className="cart-drawer__item-image">
-                    <img src={item.image_url || '/placeholder.jpg'} alt={item.title} />
+                    <img src={getImageUrl(item.image_url)} alt={item.title} />
                   </div>
                   <div className="cart-drawer__item-info">
                     <p className="cart-drawer__item-title">{item.title}</p>
