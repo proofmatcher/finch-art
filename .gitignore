@@ -7,8 +7,6 @@ client/dist/
 client/.vite/
 
 # Environment files — keep .env.production (public API URL only, no secrets)
-.env
-.env.local
 server/.env
 client/.env
 
@@ -31,8 +29,8 @@ Thumbs.db
 npm-debug.log*
 
 # Editor
-.vscode/
 .idea/
 
 # Vercel
 .vercel/
+config.bat
