@@ -7,8 +7,6 @@ client/dist/
 client/.vite/
 
 # Environment files — keep .env.production (public API URL only, no secrets)
-.env
-.env.local
 server/.env
 client/.env
 
@@ -36,3 +34,4 @@ npm-debug.log*
 
 # Vercel
 .vercel/
+config.bat
