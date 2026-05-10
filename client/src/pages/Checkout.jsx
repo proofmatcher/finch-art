@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { getImageUrl } from '../lib/imageUrl';
 import { Check, Shield, ArrowRight } from 'lucide-react';
 import toast from 'react-hot-toast';
 import './Checkout.css';
@@ -257,7 +258,7 @@ export default function Checkout() {
                 {items.map(item => (
                   <div key={item.id} className="checkout-summary__item">
                     <div className="checkout-summary__item-image">
-                      <img src={item.image_url || '/placeholder.jpg'} alt={item.title} />
+                      <img src={getImageUrl(item.image_url)} alt={item.title} />
                     </div>
                     <div className="checkout-summary__item-info">
                       <p className="checkout-summary__item-title">{item.title}</p>
