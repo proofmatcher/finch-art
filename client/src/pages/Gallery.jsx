@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import ArtworkCard from '../components/ArtworkCard';
+import staticArtworks from '../lib/staticArtworks';
 import { Filter, SlidersHorizontal, X, ChevronDown, ChevronUp } from 'lucide-react';
 import './Gallery.css';
 
@@ -77,7 +78,27 @@ export default function Gallery() {
         setArtworks(r.data.artworks);
         setPagination(r.data.pagination);
       })
-      .catch(console.error)
+      .catch(() => {
+        // API unavailable — filter static data client-side
+        let results = [...staticArtworks];
+        if (filters.category) results = results.filter(a => a.category === filters.category);
+        if (filters.style) results = results.filter(a => a.style === filters.style);
+        if (filters.subject) results = results.filter(a => a.subject === filters.subject);
+        if (filters.is_on_sale) results = results.filter(a => a.is_on_sale);
+        if (filters.min_price) results = results.filter(a => (a.sale_price || a.price) >= Number(filters.min_price));
+        if (filters.max_price) results = results.filter(a => (a.sale_price || a.price) <= Number(filters.max_price));
+        if (filters.search) {
+          const q = filters.search.toLowerCase();
+          results = results.filter(a => a.title.toLowerCase().includes(q) || a.description.toLowerCase().includes(q));
+        }
+        if (filters.sort === 'price_asc') results.sort((a, b) => (a.sale_price || a.price) - (b.sale_price || b.price));
+        else if (filters.sort === 'price_desc') results.sort((a, b) => (b.sale_price || b.price) - (a.sale_price || a.price));
+        else if (filters.sort === 'title') results.sort((a, b) => a.title.localeCompare(b.title));
+        else if (filters.sort === 'oldest') results.sort((a, b) => a.year - b.year);
+        else results.sort((a, b) => b.year - a.year); // newest
+        setArtworks(results);
+        setPagination({ total: results.length, page: 1, pages: 1 });
+      })
       .finally(() => setLoading(false));
   }, [searchParams.toString()]);
 
