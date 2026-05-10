@@ -1,9 +1,9 @@
 {
   "name": "finch-art",
   "version": "1.0.0",
-  "description": "Finch Art — R. Porter Finch Art Marketplace",
+  "description": "Finch Art \u2014 R. Porter Finch Art Marketplace",
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "node api.js && concurrently \"npm run server\" \"npm run client\"",
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
     "seed": "cd server && npm run seed",
