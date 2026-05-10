@@ -4,6 +4,7 @@ import ArtworkCard from '../components/ArtworkCard';
 import { ArrowRight, Award, Truck, RefreshCw, Shield } from 'lucide-react';
 import api from '../lib/api';
 import { getImageUrl } from '../lib/imageUrl';
+import staticArtworks from '../lib/staticArtworks';
 import './Home.css';
 
 const HERO_IMG = getImageUrl('/uploads/finch_art_hero.png');
@@ -43,6 +44,10 @@ export default function Home() {
     ]).then(([featRes, saleRes]) => {
       setFeatured(featRes.data.artworks);
       setOnSale(saleRes.data.artworks);
+    }).catch(() => {
+      // API unavailable — use static fallback data
+      setFeatured(staticArtworks.filter(a => a.is_featured).slice(0, 8));
+      setOnSale(staticArtworks.filter(a => a.is_on_sale).slice(0, 4));
     }).finally(() => setLoading(false));
   }, []);
 
