@@ -1,13 +1,13 @@
-// Resolves image/upload paths relative to the API server.
-// In development: empty string (Vite proxy handles /uploads → localhost:3001)
-// In production: Railway URL prefix (set via VITE_API_URL env var)
-const API_BASE = import.meta.env.VITE_API_URL || '';
+// Images are served as static assets from client/public/uploads/
+// This works on both local dev (Vite serves them) and Vercel (CDN serves them).
+// Only API calls need the Railway URL prefix (handled via axios.defaults.baseURL in main.jsx).
 
 export function getImageUrl(path) {
   if (!path) return '/placeholder.jpg';
-  // Already absolute (http/https) — don't prefix
+  // Already absolute (http/https) — return as-is
   if (path.startsWith('http')) return path;
-  return `${API_BASE}${path}`;
+  // Relative path → served from Vite public dir / Vercel CDN
+  return path;
 }
 
-export default API_BASE;
+export default getImageUrl;
