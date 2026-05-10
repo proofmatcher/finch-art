@@ -82,17 +82,15 @@ export default function Artist() {
         <PhotoLightbox photos={porterPhotos} index={lightbox} onClose={() => setLightbox(null)} />
       )}
 
-      {/* Hero — real photo of Porter by the Seine */}
+      {/* Hero — Split: text left, tilted photo collage right */}
       <section className="artist-hero">
-        <div className="artist-hero__bg">
-          <img src={getImageUrl('/uploads/porter_paris_arc.jpg')} alt="R. Porter Finch — Paris" />
-          <div className="artist-hero__overlay" />
-        </div>
-        <div className="container">
+        <div className="artist-hero__inner container">
+
+          {/* Left — identity */}
           <div className="artist-hero__content">
             <div className="section-header__eyebrow">The Artist</div>
             <h1 className="artist-hero__name">R. Porter Finch</h1>
-            <p className="artist-hero__tagline">Abstract Expressionist · Mystical Impressionist · Santa Fe, New Mexico</p>
+            <p className="artist-hero__tagline">Abstract Expressionist · Mystical Impressionist<br />Santa Fe, New Mexico</p>
             <div className="artist-hero__contact">
               <a href="tel:+13056001817" className="artist-hero__contact-link">
                 <Phone size={14} /><span>305-600-1817</span>
@@ -105,6 +103,21 @@ export default function Artist() {
               </div>
             </div>
           </div>
+
+          {/* Right — tilted photo collage */}
+          <div className="artist-hero__collage">
+            {porterPhotos.map((photo, i) => (
+              <div
+                key={i}
+                className={`artist-hero__photo artist-hero__photo--${i}`}
+                onClick={() => setLightbox(i)}
+              >
+                <img src={photo.src} alt={photo.caption} />
+                <div className="artist-hero__photo-label">{photo.caption}</div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
