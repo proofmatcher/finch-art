@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import { getImageUrl } from '../lib/imageUrl';
 import { Package, ImageIcon, MessageSquare, TrendingUp, Plus, Edit2, Trash2, Check, X, Eye } from 'lucide-react';
 import toast from 'react-hot-toast';
 import './Admin.css';
@@ -239,7 +240,7 @@ function ArtworksTab() {
               <tr key={artwork.id}>
                 <td>
                   <div className="admin-artwork-thumb">
-                    <img src={artwork.image_url} alt={artwork.title} />
+                    <img src={getImageUrl(artwork.image_url)} alt={artwork.title} />
                   </div>
                 </td>
                 <td>
